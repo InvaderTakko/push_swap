@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/01 15:53:42 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/04 15:53:41 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_ps_node static *init_stack(int argc, char *argv[])
 	long		number;
 	int			i;
 
-	//if (argc)
+	if (argc)
 	a_stack = NULL;
 	number = 0;
 	i = 0;
@@ -87,7 +87,6 @@ t_ps_node static *init_stack(int argc, char *argv[])
 		//printf("%ld\n", number);
 		i++;
 	}
-
 	return (a_stack);
 }
 
@@ -143,8 +142,8 @@ int	main(int argc, char *argv[])
 {
 	t_ps_node	*a;
 	t_ps_node	*b;
-	t_ps_node	*temp_sorted;
-	char	**split_arg;
+	//t_ps_node	*temp_sorted;
+	char	**split_arg = NULL;
 
 	//a = NULL;
 	b = NULL;
@@ -161,7 +160,7 @@ int	main(int argc, char *argv[])
 	a = init_stack(argc, split_arg);
 	//b = init_stack(argc, split_arg);
 	//temp_sorted = init_stack(argc, split_arg);
-	ft_pre_index(&a);
+	rank_index(&a);
 	//swap_a(&a);
 	//push_to_b(&a, &b);
 	//push_to_b(&a, &b);
@@ -175,7 +174,7 @@ int	main(int argc, char *argv[])
 
 	first_swap(&a, &b);
 
-	set_price(&a);
+	//set_price(&a);
 
 	//while(a->next)
 	//{

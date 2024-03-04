@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:07:03 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/01 15:56:14 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/04 17:41:18 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int find_position(t_ps_node **node, int value)
 {
 	int position;
-	int stack_len;
+	//int stack_len;
 
 	position = 1;
 
@@ -33,7 +33,7 @@ int find_position(t_ps_node **node, int value)
 
 int	set_price(t_ps_node **a)
 {
-	int	price;
+	//int	price;
 	int position;
 	t_ps_node	*head;
 	int stack_len;	
@@ -73,29 +73,30 @@ void first_swap(t_ps_node **a, t_ps_node **b)
 	second_a = second_a->next;
 	while((*a)->next)
 	{
-		//if(lstsize(*a) >= 2)
-		//{
-		//	ft_pre_index(a);
-		//	ft_pre_index(b);
-		//	set_price(a);
-		//	set_price(b);
-		//	if ((*a)->price > second_a->price && (*a)->price > second_a->price && (*a)->next && (*b)->next)
-		//	{
-		//		swap_both(a, b);
-		//		temp_a = last_node(*a);
-		//		temp_b = last_node(*b);
-		//	}
-		//	ft_pre_index(a);
-		//	ft_pre_index(b);
-		//	set_price(a);
-		//	set_price(b);
-		//	temp_a = last_node(*a);
-		//	temp_b = last_node(*b);
-		//	if ((*a)->price > temp_a->price && (*b)->price < temp_b->price && (*a)->next && (*b)->next)
-		//		rotate_both(a, b);
-		//}
+		if(lstsize(*a) >= 2)
+		{
+			rank_index(a);
+			rank_index(b);
+			set_price(a);
+			set_price(b);
+			if ((*a)->price > second_a->price && (*a)->price > second_a->price && (*a)->next && (*b)->next)
+			{
+				swap_both(a, b);
+				//temp_a = last_node(*a);
+				//temp_b = last_node(*b);
+				printf("reached 1st if");
+			}
+			rank_index(a);
+			rank_index(b);
+			set_price(a);
+			set_price(b);
+			temp_a = last_node(*a);
+			temp_b = last_node(*b);
+			if ((*a)->price > temp_a->price && (*b)->price < temp_b->price && (*a)->next && (*b)->next)
+				rotate_both(a, b);
+		}
 		rank_index(a);
-		ft_pre_index(b);
+		rank_index(b);
 		set_price(a);
 		set_price(b);		
 		push_cheapest(a, b);
@@ -117,8 +118,11 @@ void first_swap(t_ps_node **a, t_ps_node **b)
 		//	//if((*a)->price > temp_a->price && (*b)->price < temp_b->price)	
 
 		//}
-
 		//temp = temp->next;
+	}
+	if (!((*a)->next))
+	{
+		push_to_b(a, b);
 	}
 
 	
