@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:55 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/01 15:53:29 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/05 10:09:46 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,28 @@ void rank_index(t_ps_node **head)
 		temp->index = i;
 		temp = temp->next;
 		i++;
+	}
+}
+
+void	pre_index(t_ps_node **stack)
+{
+	t_ps_node	*tmp;
+	t_ps_node	*tmp2;
+	int		index;
+
+	tmp = *stack;
+	index = 0;
+	while (tmp)
+	{
+		index = 0;
+		tmp2 = *stack;
+		while (tmp2)
+		{
+			if (tmp->value > tmp2->value)
+				index++;
+			tmp2 = tmp2->next;
+		}
+		tmp->index = index;
+		tmp = tmp->next;
 	}
 }

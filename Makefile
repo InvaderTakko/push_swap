@@ -6,7 +6,7 @@
 #    By: sruff <sruff@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 14:34:25 by sruff             #+#    #+#              #
-#    Updated: 2024/03/01 14:26:47 by sruff            ###   ########.fr        #
+#    Updated: 2024/03/06 14:58:34 by sruff            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 CC		= cc
 #CFLAGSS	= -Wall -Wextra -Werror -g
 CFLAGSS	= 
-INCFLAG	= -Imlx -I include -I libft
+INCFLAG	=  -I include -I libft
 # File Variables
 NAME	= push_swap
 SRC		= main.c push_moves.c rotate.c reverse_rotate.c push.c swap.c utils.c brain.c

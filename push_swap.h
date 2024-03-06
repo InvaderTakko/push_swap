@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:19:12 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/01 15:45:47 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/05 10:34:24 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int	lstsize(t_ps_node *lst);
 int find_position(t_ps_node **node, int value);
 int	set_price(t_ps_node **a);
 void first_swap(t_ps_node **a, t_ps_node **b);
-void first_swap(t_ps_node **a, t_ps_node **b);
+void second_swap(t_ps_node **a, t_ps_node **b);
 int push_cheapest(t_ps_node **a, t_ps_node **b);
 
-void	ft_pre_index(t_ps_node **stack);
+void pre_index(t_ps_node **stack);
 void rank_index(t_ps_node **head);
 
 #endif

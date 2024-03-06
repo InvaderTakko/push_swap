@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/04 15:53:41 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/06 13:29:30 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int	main(int argc, char *argv[])
 	a = init_stack(argc, split_arg);
 	//b = init_stack(argc, split_arg);
 	//temp_sorted = init_stack(argc, split_arg);
-	rank_index(&a);
+	//rank_index(&a);
 	//swap_a(&a);
 	//push_to_b(&a, &b);
 	//push_to_b(&a, &b);
@@ -171,8 +171,9 @@ int	main(int argc, char *argv[])
 	//reverse_rotate_both(&a, &b);
 	//rotate_a(&a);
 
-
+	
 	first_swap(&a, &b);
+	second_swap(&a, &b);
 
 	//set_price(&a);
 

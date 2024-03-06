@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:41:18 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/04 15:24:04 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/06 11:57:33 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,41 @@ void swap(t_ps_node **node)
 		
 	
 }
-void rotate(t_ps_node **node)
-{
-	t_ps_node	*first;
-	t_ps_node	*last;
+//void rotate(t_ps_node **node)
+//{
+//	t_ps_node	*first;
+//	t_ps_node	*last;
 
-	first = *node;
-	*node = (*node)->next;
-	last = last_node(*node);
-	last->next = first;
-	first->previous = last;
-	first->next = NULL;
-	(*node)->previous = NULL;
+//	first = *node;
+//	*node = (*node)->next;
+//	last = last_node(*node);
+//	last->next = first;
+//	first->previous = last;
+//	first->next = NULL;
+//	(*node)->previous = NULL;
 
+//}
+
+void rotate(t_ps_node **node) {
+    if (*node == NULL || (*node)->next == NULL) {
+        // If the list is empty or has only one node, no need to rotate
+        return;
+    }
+
+    t_ps_node *first = *node;
+    t_ps_node *second = (*node)->next;
+    t_ps_node *last = last_node(*node);
+
+    // Update pointers
+    first->previous = last;
+    first->next = NULL;
+    second->previous = NULL;
+    last->next = first;
+
+    // Update node pointer to point to the new head
+    *node = second;
 }
+
 
 void reverse_rotate(t_ps_node **node)
 {
