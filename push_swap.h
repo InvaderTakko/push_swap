@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:19:12 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/05 10:34:24 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/08 14:18:44 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void push_to_b(t_ps_node **a, t_ps_node **b);
 
 int	find_cheapest(t_ps_node *node);
 t_ps_node *find_smallest(t_ps_node *node);
+t_ps_node *find_biggest(t_ps_node *node);
 int	lstsize(t_ps_node *lst);
 
 int find_position(t_ps_node **node, int value);

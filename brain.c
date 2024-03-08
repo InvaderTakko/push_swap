@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:07:03 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/06 16:01:29 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/08 16:36:21 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,43 +57,100 @@ int	set_price(t_ps_node **a)
 	}
 	return 1;
 }
-void first_swap(t_ps_node **a, t_ps_node **b)
-{
-	int	list_size;
-	int index_brackets;
-	int i;
-	t_ps_node	*temp;
+//void first_swap(t_ps_node **a, t_ps_node **b)
+//{
+//	int	list_size;
+//	int index_brackets;
+//	int i;
+//	int	range;
+//	float percentage;
+//	t_ps_node	*temp;
 
-	i = 1;
-	pre_index(a);
-	//pre_index(b);
-	set_price(a);
-	//set_price(b);
-	temp = *a;
-	list_size = lstsize(*a);
-	index_brackets = list_size / 6;
-	if (list_size % 6 != 0)
-		index_brackets++;
-	//while(lstsize(*a) > 1)
-	while(*a)
+//	i = 1;
+//	percentage = 0.05;
+//	pre_index(a);
+//	//pre_index(b);
+//	set_price(a);
+//	//set_price(b);
+//	temp = *a;
+//	list_size = lstsize(*a);
+
+//	range = list_size * percentage;
+
+//	//index_brackets = list_size / 6;
+//	//if (list_size % 6 != 0)
+//	//	index_brackets++;
+//	//while(lstsize(*a) > 1)
+//	while(*a)
+//	{
+//		if((*a)->index  < range)
+//		{
+//			push_to_b(a, b);
+//			i++;
+//		}	
+//		else if (i > index_brackets)
+//		{
+//			//if (list_size % 6 != 0)
+//			//	index_brackets++;
+//			index_brackets += index_brackets;
+//		}
+//		else if (*a) 
+//			rotate_a(a);
+//	}
+//	//push_to_b(a, b);
+//	//push_to_b(a, b);
+//}
+
+//int static	ft_sqrt(int nb)
+//{
+//	int	sqr_root;
+
+//	if (nb < 0)
+//		return (0);
+//	sqr_root = 0;
+//	while (sqr_root * sqr_root <= nb)
+//	{
+//		if (sqr_root * sqr_root <= nb && (sqr_root + 1) * (sqr_root + 1) >= nb)
+//			return (sqr_root);
+//		sqr_root++;
+//	}
+//	return (0);
+//}
+
+void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
+{
+	int	i;
+	int	range;
+	int	lst_size;
+	float percentage;
+
+	lst_size = lstsize(*stack_a);
+	i = 0;
+	percentage = 0.07;
+	range = lst_size * percentage;
+	//range = ft_sqrt(lst_size) * 1.6;
+	//printf("the range is %d", range);
+	pre_index(stack_a);
+	while (*stack_a)
 	{
-		if((*a)->index < index_brackets)
+		if ((*stack_a)->index < i)
 		{
-			push_to_b(a, b);
+			push_to_b(stack_a, stack_b);
+			rotate_b(stack_b);
 			i++;
-		}	
-		else if (i > index_brackets)
-		{
-			//if (list_size % 6 != 0)
-			//	index_brackets++;
-			index_brackets += index_brackets;
 		}
-		else if (*a) 
-			rotate_a(a);
+		else if ((*stack_a)->index < i + range)
+		{
+			push_to_b(stack_a, stack_b);
+			i++;
+		}
+		else
+		{
+			rotate_a(stack_a);
+		}
 	}
-	//push_to_b(a, b);
-	//push_to_b(a, b);
 }
+
 // 100 : 6
 // 
 
@@ -148,7 +205,7 @@ void second_swap(t_ps_node **a, t_ps_node **b)
 
 int push_cheapest(t_ps_node **a, t_ps_node **b)
 {
-	t_ps_node *smallest_node;
+	t_ps_node *biggest_node;
 	int			lst_size;
 	int			lst_half;
 	//set_price(a);
@@ -157,25 +214,25 @@ int push_cheapest(t_ps_node **a, t_ps_node **b)
 	rank_index(b);
 	lst_size = lstsize(*b);
 	lst_half = lst_size / 2;
-	smallest_node = find_smallest(*b);
-	if(!smallest_node)
+	biggest_node = find_biggest(*b);
+	if(!biggest_node)
 		return (0);
-	while((*b)->price != smallest_node->price)
+	while((*b)->price != biggest_node->price)
 	{
 		//rank_index(a);
 		//pre_index(b);
 		////set_price(a);
 		//set_price(b);
 		//rank_index(b);
-		if (smallest_node->index < lst_half)
+		if (biggest_node->index < lst_half)
 			rotate_b(b); //top half
 		else
 			reverse_rotate_b(b); // bottom half
-		//smallest_node = find_smallest(*a);	
+		//biggest_node = find_biggest(*a);	
 	}
 	//set_price(a);
 	//set_price(b);
-	if((*b)->price == smallest_node->price)
+	if((*b)->price == biggest_node->price)
 		return (push_to_a(a, b), 1);
 	return (1);
 }

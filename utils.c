@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:55 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/05 10:09:46 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/08 14:17:49 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,28 @@ t_ps_node *find_smallest(t_ps_node *node)
 		//	//return (smallest_node);
 	}
 	return (smallest_node);
+}
+
+t_ps_node *find_biggest(t_ps_node *node)
+{
+	long			price;
+	t_ps_node	*biggest_node;
+
+	if (NULL == node)
+		return (NULL);
+	price = node->price;	
+	while (node)
+	{
+		if (node->price >= price)
+		{
+			price = node->price;
+			biggest_node = node;
+		}
+		node = node->next;
+		//if(!node->next)	
+		//	//return (biggest_node);
+	}
+	return (biggest_node);
 }
 
 int	lstsize(t_ps_node *lst)
