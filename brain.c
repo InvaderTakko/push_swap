@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:07:03 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/08 16:36:21 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/12 17:22:22 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,26 +101,43 @@ int	set_price(t_ps_node **a)
 //	//push_to_b(a, b);
 //}
 
-//int static	ft_sqrt(int nb)
-//{
-//	int	sqr_root;
 
-//	if (nb < 0)
-//		return (0);
-//	sqr_root = 0;
-//	while (sqr_root * sqr_root <= nb)
+//void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
+//{
+//	int	i;
+//	int	range;
+//	int	lst_size;
+//	float percentage;
+//	lst_size = lstsize(*stack_a);
+//	i = 0;
+//	percentage = 0.07;
+//	range = lst_size * percentage;
+//	pre_index(stack_a);
+//	set_price(stack_a);
+//	while (*stack_a)
 //	{
-//		if (sqr_root * sqr_root <= nb && (sqr_root + 1) * (sqr_root + 1) >= nb)
-//			return (sqr_root);
-//		sqr_root++;
+//		if ((*stack_a)->index < i)
+//		{
+//			push_to_b(stack_a, stack_b);
+//			rotate_b(stack_b);
+//			i++;
+//		}
+//		else if ((*stack_a)->index < i + range)
+//		{
+//			push_to_b(stack_a, stack_b);
+//			i++;
+//		}
+//		else if ((*stack_a)->price )
+//		{
+//			rotate_a(stack_a);
+//		}
 //	}
-//	return (0);
 //}
 
 void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 {
 	int	i;
-	int	range;
+	float	range;
 	int	lst_size;
 	float percentage;
 
@@ -128,11 +145,17 @@ void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 	i = 0;
 	percentage = 0.07;
 	range = lst_size * percentage;
-	//range = ft_sqrt(lst_size) * 1.6;
-	//printf("the range is %d", range);
 	pre_index(stack_a);
-	while (*stack_a)
-	{
+	set_price(stack_a);
+	//if (range <= 1)
+	//{
+	//	range = 0;
+	//}
+	while ((*stack_a)->next)
+	{	
+		//set_price(stack_a);
+		//if ((*stack_a)->index < (*stack_a)->next->index)
+		//	swap_a(stack_a);
 		if ((*stack_a)->index < i)
 		{
 			push_to_b(stack_a, stack_b);
@@ -148,6 +171,24 @@ void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 		{
 			rotate_a(stack_a);
 		}
+;
+		//if ((*stack_a)->index > (*stack_a)->next->index)
+		//	swap_a(stack_a);
+		//if ((*stack_a)->next && (*stack_b)->next)
+		//{
+		//	if (((*stack_a)->price > (*stack_a)->next->price) && ((*stack_b)->price > (*stack_b)->next->price))
+		//	{
+		//		swap_both(stack_a, stack_b);
+		//		//temp_a = last_node(*a);
+		//		//temp_b = last_node(*b);
+		//	}
+		//	else if ((*stack_a)->index > (*stack_a)->next->index)
+		//		swap_a(stack_a);
+		//}
+	}
+	if ((!(*stack_a)->next))
+	{
+		push_to_b(stack_a, stack_b);
 	}
 }
 
@@ -158,13 +199,13 @@ void second_swap(t_ps_node **a, t_ps_node **b)
 {
 	//t_ps_node *second_a;
 	//t_ps_node *second_b;
-	//t_ps_node *temp_a;
-	//t_ps_node *temp_b;
+	t_ps_node *temp_a;
+	t_ps_node *temp_b;
 
 	//second_a = *a;
 	//second_b = *b;
-	//temp_a = *a;
-	//temp_b = *b;	
+	temp_a = *a;
+	temp_b = *b;	
 
 	//second_a = second_a->next;
 	//pre_index(b);
@@ -176,21 +217,28 @@ void second_swap(t_ps_node **a, t_ps_node **b)
 		//set_price(a);
 		//set_price(b);		
 		push_cheapest(a, b);
-		//if(lstsize(*a) >= 2)
+		//if((*b)->next && (*a)->next)
 		//{
-		//	ft_pre_index(a);
 		//	set_price(a);
 		//	set_price(b);
-		//	if ((*a)->price > second_a->price && (*a)->price > second_a->price && (*a)->next && (*b)->next)
+		//	if (((*a)->price > (*a)->next->price) && ((*b)->price > (*b)->next->price))
 		//	{
 		//		swap_both(a, b);
-		//		temp_a = last_node(*a);
-		//		temp_b = last_node(*b);
+		//		//temp_a = last_node(*a);
+		//		//temp_b = last_node(*b);
 		//	}
 		//	temp_a = last_node(*a);
 		//	temp_b = last_node(*b);
-		//	if ((*a)->price > temp_a->price && (*b)->price < temp_b->price && (*a)->next && (*b)->next)
+		//	set_price(a);
+		//	set_price(b);
+		//	if (((*a)->price > temp_a->price) && ((*b)->price > temp_b->price) && ((*a)->next && (*b)->next))
 		//		rotate_both(a, b);
+		//	temp_a = last_node(*a);
+		//	temp_b = last_node(*b);
+		//	set_price(a);
+		//	set_price(b);	
+		//	if (((*a)->price < temp_a->price) && ((*b)->price < temp_b->price) && ((*a)->next && (*b)->next))
+		//		reverse_rotate_both(a, b);	
 		//	//if((*a)->price > temp_a->price && (*b)->price < temp_b->price)	
 
 		//}
@@ -219,11 +267,7 @@ int push_cheapest(t_ps_node **a, t_ps_node **b)
 		return (0);
 	while((*b)->price != biggest_node->price)
 	{
-		//rank_index(a);
-		//pre_index(b);
-		////set_price(a);
-		//set_price(b);
-		//rank_index(b);
+
 		if (biggest_node->index < lst_half)
 			rotate_b(b); //top half
 		else

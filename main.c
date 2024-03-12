@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/06 13:29:30 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/12 17:45:35 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,18 @@ void	ft_pre_index(t_ps_node **stack)
 		tmp = tmp->next;
 	}
 }
+void	static 	free_stack(t_ps_node **lst)
+{
+	t_ps_node	*tmp;
+
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		free(tmp);
+	}
+
+}
 
 int	main(int argc, char *argv[])
 {
@@ -164,6 +176,7 @@ int	main(int argc, char *argv[])
 	//swap_a(&a);
 	//push_to_b(&a, &b);
 	//push_to_b(&a, &b);
+	//swap_both(&a, &b);
 	//push_to_b(&a, &b);
 	//swap_b(&b);
 	//swap_b(&b);
@@ -175,6 +188,9 @@ int	main(int argc, char *argv[])
 	first_swap(&a, &b);
 	second_swap(&a, &b);
 
+	free_stack(&a);
+	//free_stack(&b);
+	system("leaks push_swap");
 	//set_price(&a);
 
 	//while(a->next)
@@ -183,7 +199,6 @@ int	main(int argc, char *argv[])
 	//	//printf("%p\n", a->next);
 	//	a = a->next;
 	//}
-
 	//printf("%d\n\n", a->price);
 
 	//while(a->previous)

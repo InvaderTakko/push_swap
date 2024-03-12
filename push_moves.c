@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:41:18 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/06 11:57:33 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/12 16:05:17 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,51 @@ void push(t_ps_node **a_stack, t_ps_node **b_stack)
 }
 
 
-void swap(t_ps_node **node)
-{
-	t_ps_node	*second;
-	t_ps_node	*third;
+//void swap(t_ps_node **node)
+//{
+//	t_ps_node	*second;
+//	t_ps_node	*third;
 
-	second = (*node)->next;
-	third = second->next;
+//	//if (!(*node)->next)
+//	//	return;
+//	second = (*node)->next;
+//	third = second->next;
 
-	second->next = *node;
-	(*node)->next = third;
+//	second->next = *node;
+//	(*node)->next = third;
 
-	second->previous = NULL;
-	(*node)->previous = second;
+//	second->previous = NULL;
+//	(*node)->previous = second;
 
-	if (third != NULL)
-		third->previous = *node;
+//	if (third != NULL)
+//		third->previous = *node;
 
-	*node = second;	
+//	*node = second;	
 		
 	
+//}
+
+void swap(t_ps_node **node) {
+    // Check if the list is empty or has only one node
+    if (!(*node) || !((*node)->next))
+        return;
+
+    t_ps_node *first = *node;
+    t_ps_node *second = first->next;
+    t_ps_node *third = second->next;
+
+    // Adjust pointers to swap the first two nodes
+    if (third)
+        third->previous = first;
+    second->previous = NULL;
+    first->previous = second;
+    first->next = third;
+    second->next = first;
+
+    // Update the head pointer to point to the new first node
+    *node = second;
 }
+
 //void rotate(t_ps_node **node)
 //{
 //	t_ps_node	*first;
