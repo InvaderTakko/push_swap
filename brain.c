@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:07:03 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/12 17:22:22 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/15 21:56:43 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,9 @@ void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 	while ((*stack_a)->next)
 	{	
 		//set_price(stack_a);
-		//if ((*stack_a)->index < (*stack_a)->next->index)
+		//if ((*stack_a)->index > (*stack_a)->next->index)
 		//	swap_a(stack_a);
-		if ((*stack_a)->index < i)
+		if ((*stack_a)->index < i )
 		{
 			push_to_b(stack_a, stack_b);
 			rotate_b(stack_b);
@@ -171,7 +171,11 @@ void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 		{
 			rotate_a(stack_a);
 		}
-;
+		//else if ((last_node(*stack_a))->index < (*stack_a)->next->index)
+		//{
+		//	reverse_rotate_a(stack_a);
+		//}
+
 		//if ((*stack_a)->index > (*stack_a)->next->index)
 		//	swap_a(stack_a);
 		//if ((*stack_a)->next && (*stack_b)->next)
@@ -199,13 +203,13 @@ void second_swap(t_ps_node **a, t_ps_node **b)
 {
 	//t_ps_node *second_a;
 	//t_ps_node *second_b;
-	t_ps_node *temp_a;
-	t_ps_node *temp_b;
+	//t_ps_node *temp_a;
+	//t_ps_node *temp_b;
 
 	//second_a = *a;
 	//second_b = *b;
-	temp_a = *a;
-	temp_b = *b;	
+	//temp_a = *a;
+	//temp_b = *b;	
 
 	//second_a = second_a->next;
 	//pre_index(b);

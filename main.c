@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: intra <intra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/12 17:45:35 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/15 20:04:36 by intra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_ps_node *last_node(t_ps_node *header)
 	return (header);
 }
 
-void static init_a(t_ps_node **a, int number)
+static void init_a(t_ps_node **a, int number)
 {
 	t_ps_node	*node;
 	t_ps_node	*last;
@@ -66,7 +66,7 @@ void static init_a(t_ps_node **a, int number)
 	}
 }
 
-t_ps_node static *init_stack(int argc, char *argv[])
+ static	t_ps_node  *init_stack(int argc, char *argv[])
 {
 	t_ps_node	*a_stack;
 	long		number;
@@ -137,7 +137,7 @@ void	ft_pre_index(t_ps_node **stack)
 		tmp = tmp->next;
 	}
 }
-void	static 	free_stack(t_ps_node **lst)
+static void free_stack(t_ps_node **lst)
 {
 	t_ps_node	*tmp;
 
@@ -154,72 +154,23 @@ int	main(int argc, char *argv[])
 {
 	t_ps_node	*a;
 	t_ps_node	*b;
-	//t_ps_node	*temp_sorted;
+	int			i;
 	char	**split_arg = NULL;
 
-	//a = NULL;
+	i = 0;
 	b = NULL;
 	if (argc < 2 || !argv[1][0])
 		return (1);
 	else if (argc == 2)
-	{
 		split_arg = ft_split(argv[1], ' ');
-	}
 	else if (argc > 2)
-	{
 		split_arg = &argv[1];
-	}
 	a = init_stack(argc, split_arg);
-	//b = init_stack(argc, split_arg);
-	//temp_sorted = init_stack(argc, split_arg);
-	//rank_index(&a);
-	//swap_a(&a);
-	//push_to_b(&a, &b);
-	//push_to_b(&a, &b);
-	//swap_both(&a, &b);
-	//push_to_b(&a, &b);
-	//swap_b(&b);
-	//swap_b(&b);
-	//reverse_rotate_a(&a);
-	//reverse_rotate_both(&a, &b);
-	//rotate_a(&a);
-
-	
 	first_swap(&a, &b);
 	second_swap(&a, &b);
-
 	free_stack(&a);
-	//free_stack(&b);
-	system("leaks push_swap");
-	//set_price(&a);
-
-	//while(a->next)
-	//{
-	//	printf("%d\n", a->price);
-	//	//printf("%p\n", a->next);
-	//	a = a->next;
-	//}
-	//printf("%d\n\n", a->price);
-
-	//while(a->previous)
-	//{
-	//	printf("%d\n", a->price);
-	//	a = a->previous;
-	//}
-	//printf("%d\n\n", a->price);
-	//rank_index(&b);
-	//while(b->next)
-	//{
-	//	printf("%d\n", b->index);
-	//	b = b->next;
-	//}
-	//printf("%d\n\n", b->index);
-
-	//while(b->previous)
-	//{
-	//	printf("%d\n", b->value);
-	//	b = b->previous;
-	//}
-	//printf("%d\n\n", b->value);		
+	while (split_arg[i])
+		free(split_arg[i++]);
+	free(split_arg);	
 	return (0);		
 }

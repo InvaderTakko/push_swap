@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
+/*   By: intra <intra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:55 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/08 14:17:49 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/15 19:00:59 by intra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_cheapest(t_ps_node *node)
 	long			price;
 	int				i;
 	int				j;
-	t_ps_node	*smallest_node;
+	//t_ps_node	*smallest_node;
 
 	i = 1;
 	j = 1;
@@ -29,7 +29,7 @@ int	find_cheapest(t_ps_node *node)
 		if (node->price < price)
 		{
 			price = node->price;
-			smallest_node = node;
+			//smallest_node = node;
 			j = i;
 		}
 		node = node->next;

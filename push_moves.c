@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:41:18 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/12 16:05:17 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/15 19:29:38 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void push(t_ps_node **a_stack, t_ps_node **b_stack)
     temp->previous = NULL;
     *a_stack = temp;
 }
-
 
 //void swap(t_ps_node **node)
 //{
