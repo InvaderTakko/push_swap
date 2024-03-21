@@ -6,7 +6,7 @@
 /*   By: intra <intra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/15 20:04:36 by intra            ###   ########.fr       */
+/*   Updated: 2024/03/21 18:26:22 by intra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,37 @@
 //	return (smallest_node);
 //}
 
+void free_split_arg(char **split_arg) 
+{
+    if (split_arg == NULL)
+        return;
+
+    char **temp = split_arg;
+    while (*temp)
+	{
+        free(*temp);
+        temp++;
+
+    }
+    if (*split_arg)
+	{
+		free(split_arg);
+	}
+		
+}
+
+static void free_stack(t_ps_node **lst)
+{
+	t_ps_node	*tmp;
+
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		free(tmp);
+	}
+
+}
 t_ps_node *last_node(t_ps_node *header)
 {
 	if (header == NULL)
@@ -65,25 +96,29 @@ static void init_a(t_ps_node **a, int number)
 		node->next = NULL;
 	}
 }
-
- static	t_ps_node  *init_stack(int argc, char *argv[])
+ static	t_ps_node  *init_stack(char **argv, int argc)
 {
 	t_ps_node	*a_stack;
+	char		**temp;
+	char		*temp1;
 	long		number;
 	int			i;
 
-	if (argc)
 	a_stack = NULL;
 	number = 0;
 	i = 0;
+	temp = argv;
 
-	number = ft_atoi(argv[i]);
-	init_a(&a_stack, number);
-	i++;
 	while (argv[i])
 	{
 		number = ft_atoi(argv[i]);
+		temp1 = ft_itoa(number);
+		if(ft_strncmp(temp1, argv[i], 50) && argc == 2)
+			return (free_split_arg(temp), free(temp1), free_stack(&a_stack), NULL);
+		else if (ft_strncmp(temp1, argv[i], 50))
+			return (free(temp1), free_stack(&a_stack), NULL);
 		init_a(&a_stack, number);
+		free(temp1);
 		//printf("%ld\n", number);
 		i++;
 	}
@@ -137,27 +172,40 @@ void	ft_pre_index(t_ps_node **stack)
 		tmp = tmp->next;
 	}
 }
-static void free_stack(t_ps_node **lst)
+
+
+
+
+static int parse_input(char **input)
 {
-	t_ps_node	*tmp;
+	int i;
+	int j;
 
-	while (*lst)
+	i = 0;
+	j = 0;
+	if (!(input[i] || !(input)))
+		return 0;
+	while(input[i])
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		free(tmp);
+		while(input[i][j])
+		{
+			if (!(input[i][j] >= '0' && input[i][j] <= '9') && !(j == 0 && input[i][j] == '-' && (input[i][j + 1] >= '0' && input[i][j + 1] <= '9')))
+				return 0;
+			j++;
+		}
+		j = 0;
+		i++;	
 	}
-
+	return 1;
 }
-
 int	main(int argc, char *argv[])
 {
 	t_ps_node	*a;
 	t_ps_node	*b;
-	int			i;
+	// int			i;
 	char	**split_arg = NULL;
 
-	i = 0;
+	// i = 0;
 	b = NULL;
 	if (argc < 2 || !argv[1][0])
 		return (1);
@@ -165,12 +213,19 @@ int	main(int argc, char *argv[])
 		split_arg = ft_split(argv[1], ' ');
 	else if (argc > 2)
 		split_arg = &argv[1];
-	a = init_stack(argc, split_arg);
+	if (!(parse_input(split_arg)))
+		return 1;
+	a = init_stack(split_arg, argc);
+	if (!a)
+		return (free_stack(&a), 1);
 	first_swap(&a, &b);
 	second_swap(&a, &b);
 	free_stack(&a);
-	while (split_arg[i])
-		free(split_arg[i++]);
-	free(split_arg);	
+	if (argc == 2)
+		free_split_arg(split_arg);
+	// while (split_arg[i] && argc == 2)
+	// 	free(split_arg[i++]);
+	// free(split_arg);	
 	return (0);		
 }
+
