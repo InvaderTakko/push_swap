@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/22 14:44:31 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/22 16:59:16 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ static void init_a(t_ps_node **a, int number)
 
 static void print_error_message(void)
 {
-	write(1, "Error\n",6);
+	write(2, "Error\n",6);
 }
  static	t_ps_node  *init_stack(char **argv, int argc)
 {
@@ -224,9 +224,6 @@ void	ft_pre_index(t_ps_node **stack)
 		tmp = tmp->next;
 	}
 }
-
-
-
 
 static int parse_input(char **input)
 {
