@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: intra <intra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/21 18:26:22 by intra            ###   ########.fr       */
+/*   Updated: 2024/03/22 14:44:31 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,55 @@ t_ps_node *last_node(t_ps_node *header)
 	}
 	return (header);
 }
+// static int check_doubles_2(int *arr)
+// {
+// 	int	i;
+// 	int j;
+
+// 	i = 0;
+// 	j = 0;
+	
+//     // Iterate through the array
+// 	// size++;
+// 	while(arr[i]) {
+//         // Compare each element with all subsequent elements
+// 		j = i + 1;
+// 		if (!(arr[j]))
+//         while (arr[j])
+// 		{
+				
+//             // j = i + 1;
+// 			// If a duplicate is found, return true
+//             if (arr[i] == arr[j]) {
+//                 return 1; // True
+//             }
+// 			j++;
+//         }
+// 		i++;	
+//     }
+//     // If no duplicates found, return false
+//     return 0; // False
+// }
+	
+static int check_doubles(t_ps_node *head)
+{
+	t_ps_node	*temp;
+
+	temp = head;
+	while (temp)
+	{
+		head = temp;
+		while (head)
+		{
+			if (temp->value == head->value && temp != head)
+				return 1;
+			head = head->next;
+		}	
+		temp = temp->next;
+	}
+	return 0;
+}
+
 
 static void init_a(t_ps_node **a, int number)
 {
@@ -96,6 +145,11 @@ static void init_a(t_ps_node **a, int number)
 		node->next = NULL;
 	}
 }
+
+static void print_error_message(void)
+{
+	write(1, "Error\n",6);
+}
  static	t_ps_node  *init_stack(char **argv, int argc)
 {
 	t_ps_node	*a_stack;
@@ -108,7 +162,6 @@ static void init_a(t_ps_node **a, int number)
 	number = 0;
 	i = 0;
 	temp = argv;
-
 	while (argv[i])
 	{
 		number = ft_atoi(argv[i]);
@@ -119,7 +172,6 @@ static void init_a(t_ps_node **a, int number)
 			return (free(temp1), free_stack(&a_stack), NULL);
 		init_a(&a_stack, number);
 		free(temp1);
-		//printf("%ld\n", number);
 		i++;
 	}
 	return (a_stack);
@@ -202,10 +254,8 @@ int	main(int argc, char *argv[])
 {
 	t_ps_node	*a;
 	t_ps_node	*b;
-	// int			i;
 	char	**split_arg = NULL;
 
-	// i = 0;
 	b = NULL;
 	if (argc < 2 || !argv[1][0])
 		return (1);
@@ -214,18 +264,15 @@ int	main(int argc, char *argv[])
 	else if (argc > 2)
 		split_arg = &argv[1];
 	if (!(parse_input(split_arg)))
-		return 1;
+		return (print_error_message(),1);
 	a = init_stack(split_arg, argc);
-	if (!a)
-		return (free_stack(&a), 1);
+	if (!a || check_doubles(a))
+		return (free_stack(&a), print_error_message(), 1);
 	first_swap(&a, &b);
 	second_swap(&a, &b);
 	free_stack(&a);
 	if (argc == 2)
 		free_split_arg(split_arg);
-	// while (split_arg[i] && argc == 2)
-	// 	free(split_arg[i++]);
-	// free(split_arg);	
 	return (0);		
 }
 
