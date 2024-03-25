@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:19:12 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/08 14:18:44 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 20:10:06 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_ps_node
 	int		index;
 	struct s_ps_node	*next;
 	struct s_ps_node	*previous;
-	struct s_ps_node	*current;
 }	t_ps_node;
 
 int	main(int argc, char *argv[]);
@@ -62,8 +61,13 @@ int	set_price(t_ps_node **a);
 void first_swap(t_ps_node **a, t_ps_node **b);
 void second_swap(t_ps_node **a, t_ps_node **b);
 int push_cheapest(t_ps_node **a, t_ps_node **b);
+int check_if_ordered(t_ps_node **node, char **split_arg, int argc);
 
 void pre_index(t_ps_node **stack);
 void rank_index(t_ps_node **head);
+
+void free_split_arg(char **split_arg);
+
+void mini_sort(t_ps_node **node, t_ps_node **node2);
 
 #endif

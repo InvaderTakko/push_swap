@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:07:03 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/15 21:56:43 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 20:15:18 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,12 @@ void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 	//{
 	//	range = 0;
 	//}
-	while ((*stack_a)->next)
+	while ((*stack_a)->next) 
 	{	
 		//set_price(stack_a);
 		//if ((*stack_a)->index > (*stack_a)->next->index)
 		//	swap_a(stack_a);
-		if ((*stack_a)->index < i )
+		if ((*stack_a)->index < i)
 		{
 			push_to_b(stack_a, stack_b);
 			rotate_b(stack_b);
@@ -189,6 +189,8 @@ void	first_swap(t_ps_node **stack_a, t_ps_node **stack_b)
 		//	else if ((*stack_a)->index > (*stack_a)->next->index)
 		//		swap_a(stack_a);
 		//}
+		// if (lstsize(*stack_a) <= 3)
+		// 	mini_sort(stack_a);
 	}
 	if ((!(*stack_a)->next))
 	{

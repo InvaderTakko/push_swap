@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/22 16:59:16 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 20:09:34 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@
 //}
 
 void free_split_arg(char **split_arg) 
-{
+{    
+	char **temp;
+
+	temp = split_arg;
     if (split_arg == NULL)
         return;
 
-    char **temp = split_arg;
+
     while (*temp)
 	{
         free(*temp);
@@ -130,11 +133,13 @@ static void init_a(t_ps_node **a, int number)
 	t_ps_node	*last;
 
 	node = malloc(sizeof(t_ps_node));
-	node->next = NULL;
+	if (!node)
+		return;
 	node->value = number;
 	if (*a == NULL)
 	{
 		*a = node;
+		node->next = NULL;
 		node->previous = NULL;
 	}
 	else
@@ -148,9 +153,10 @@ static void init_a(t_ps_node **a, int number)
 
 static void print_error_message(void)
 {
-	write(2, "Error\n",6);
+	write(STDERR_FILENO, "Error\n",6);
 }
- static	t_ps_node  *init_stack(char **argv, int argc)
+
+static	t_ps_node  *init_stack(char **argv, int argc)
 {
 	t_ps_node	*a_stack;
 	char		**temp;
@@ -162,6 +168,8 @@ static void print_error_message(void)
 	number = 0;
 	i = 0;
 	temp = argv;
+	// if (!&argv[i])
+	// 	return (a_stack);
 	while (argv[i])
 	{
 		number = ft_atoi(argv[i]);
@@ -254,7 +262,7 @@ int	main(int argc, char *argv[])
 	char	**split_arg = NULL;
 
 	b = NULL;
-	if (argc < 2 || !argv[1][0])
+	if (argc < 2 )
 		return (1);
 	else if (argc == 2)
 		split_arg = ft_split(argv[1], ' ');
@@ -265,6 +273,11 @@ int	main(int argc, char *argv[])
 	a = init_stack(split_arg, argc);
 	if (!a || check_doubles(a))
 		return (free_stack(&a), print_error_message(), 1);
+	if (check_if_ordered(&a, split_arg, argc))
+		return (free_stack(&a), 0);
+	mini_sort(&a, &b);
+	if (check_if_ordered(&a, split_arg, argc))
+		return (free_stack(&a), 0);
 	first_swap(&a, &b);
 	second_swap(&a, &b);
 	free_stack(&a);
