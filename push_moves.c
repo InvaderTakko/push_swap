@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:41:18 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/15 19:29:38 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 22:09:09 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,19 @@
 //	temp->next = *a_stack;
 //	*a_stack = temp;
 //}
-void push(t_ps_node **a_stack, t_ps_node **b_stack)
+void    push(t_ps_node **a_stack, t_ps_node **b_stack)
 {
-	t_ps_node *temp;
+    t_ps_node   *temp;
 
     if (!*a_stack && !*b_stack)
         return;
-	//temp = *b_stack;
-    //*b_stack = (*b_stack)->next;
-	//(*b_stack)->previous = NULL;
-
-    //temp->next = *a_stack;
-    //temp->previous = NULL;
-
-    //if (*a_stack)
-    //{
-    //    (*a_stack)->previous = temp;
-    //}
-    //*a_stack = temp;
 	temp = *b_stack;
     *b_stack = (*b_stack)->next;
-
     if (*b_stack)
         (*b_stack)->previous = NULL;
-
     temp->next = *a_stack;
-
     if (*a_stack)
         (*a_stack)->previous = temp;
-
     temp->previous = NULL;
     *a_stack = temp;
 }

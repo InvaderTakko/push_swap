@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:19:12 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/25 20:10:06 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 22:54:14 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int check_if_ordered(t_ps_node **node, char **split_arg, int argc);
 void pre_index(t_ps_node **stack);
 void rank_index(t_ps_node **head);
 
-void free_split_arg(char **split_arg);
+void free_split(char **split_arg);
 
 void mini_sort(t_ps_node **node, t_ps_node **node2);
 

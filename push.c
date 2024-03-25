@@ -6,18 +6,19 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 22:33:50 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/01 10:13:07 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 22:02:09 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void push_to_a(t_ps_node **a, t_ps_node **b)
+void	push_to_a(t_ps_node **a, t_ps_node **b)
 {
 	push(a, b);
 	write(1, "pa\n", 3);
 }
-void push_to_b(t_ps_node **a, t_ps_node **b)
+
+void	push_to_b(t_ps_node **a, t_ps_node **b)
 {
 	push(b, a);
 	write(1, "pb\n", 3);

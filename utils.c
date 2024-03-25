@@ -6,13 +6,13 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:55 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/25 20:30:56 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/25 22:59:10 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int check_if_ordered(t_ps_node **node, char **split_arg, int argc)
+int	check_if_ordered(t_ps_node **node, char **split_arg, int argc)
 {
 	t_ps_node	*temp;
 
@@ -26,21 +26,21 @@ int check_if_ordered(t_ps_node **node, char **split_arg, int argc)
 	}
 	if (argc == 2)
 	{
-		free_split_arg(split_arg);
+		free_split(split_arg);
 	}
 	return (1);
 }
 
-void mini_sort(t_ps_node **node, t_ps_node **node2)
+void	mini_sort(t_ps_node **node, t_ps_node **node2)
 {
-	t_ps_node *temp;
-	int len;
-	int	lenOG;
+	t_ps_node	*temp;
+	int			len;
+	int			len_og;
 
 	temp = *node;
 	set_price(node);
 	len = lstsize(*node);
-	lenOG = len;
+	len_og = len;
 	while (len <= 5 && len > 3)
 	{
 		if ((*node)->index == 0 || (*node)->index == 1)
@@ -48,7 +48,6 @@ void mini_sort(t_ps_node **node, t_ps_node **node2)
 			if ((*node)->index > (*node)->next->index)
 				swap_a(node);
 			push_to_b(node, node2);
-			// push_cheapest(node, node2);
 			len--;
 		}
 		else
@@ -61,9 +60,9 @@ void mini_sort(t_ps_node **node, t_ps_node **node2)
 		else if ((*node)->next->index == find_biggest(*node)->index)
 			reverse_rotate_a(node);
 		if ((*node)->next->index < (*node)->index)
-			swap_a(node);			 
+			swap_a(node);
 	}
-	if(lenOG > 3 && lenOG <= 5)
+	if (len_og > 3 && len_og <= 5)
 		second_swap(node, node2);
 }
 
@@ -72,7 +71,6 @@ int	find_cheapest(t_ps_node *node)
 	long			price;
 	int				i;
 	int				j;
-	//t_ps_node	*smallest_node;
 
 	i = 1;
 	j = 1;
@@ -84,7 +82,6 @@ int	find_cheapest(t_ps_node *node)
 		if (node->price < price)
 		{
 			price = node->price;
-			//smallest_node = node;
 			j = i;
 		}
 		node = node->next;
@@ -93,14 +90,14 @@ int	find_cheapest(t_ps_node *node)
 	return (j);
 }
 
-t_ps_node *find_smallest(t_ps_node *node)
+t_ps_node	*find_smallest(t_ps_node *node)
 {
 	long			price;
-	t_ps_node	*smallest_node;
+	t_ps_node		*smallest_node;
 
 	if (NULL == node)
 		return (NULL);
-	price = node->price;	
+	price = node->price;
 	while (node)
 	{
 		if (node->price <= price)
@@ -109,20 +106,18 @@ t_ps_node *find_smallest(t_ps_node *node)
 			smallest_node = node;
 		}
 		node = node->next;
-		//if(!node->next)	
-		//	//return (smallest_node);
 	}
 	return (smallest_node);
 }
 
-t_ps_node *find_biggest(t_ps_node *node)
+t_ps_node	*find_biggest(t_ps_node *node)
 {
 	long			price;
-	t_ps_node	*biggest_node;
+	t_ps_node		*biggest_node;
 
 	if (NULL == node)
 		return (NULL);
-	price = node->price;	
+	price = node->price;
 	while (node)
 	{
 		if (node->price >= price)
@@ -131,8 +126,6 @@ t_ps_node *find_biggest(t_ps_node *node)
 			biggest_node = node;
 		}
 		node = node->next;
-		//if(!node->next)	
-		//	//return (biggest_node);
 	}
 	return (biggest_node);
 }
@@ -150,10 +143,10 @@ int	lstsize(t_ps_node *lst)
 	return (i);
 }
 
-void rank_index(t_ps_node **head)
+void	rank_index(t_ps_node **head)
 {
-	t_ps_node *temp;
-	int i;
+	t_ps_node	*temp;
+	int			i;
 
 	i = 1;
 	temp = *head;
@@ -169,7 +162,7 @@ void	pre_index(t_ps_node **stack)
 {
 	t_ps_node	*tmp;
 	t_ps_node	*tmp2;
-	int		index;
+	int			index;
 
 	tmp = *stack;
 	index = 0;
