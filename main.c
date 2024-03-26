@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/25 22:53:43 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/26 18:45:03 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	free_split(char **split_arg)
 		free(*temp);
 		temp++;
 	}
-	if (*split_arg)
+	if (split_arg)
 	{
 		free(split_arg);
 	}
 }
 
-static void	free_stack(t_ps_node **lst)
+void	free_stack(t_ps_node **lst)
 {
 	t_ps_node	*tmp;
 
@@ -73,49 +73,23 @@ t_ps_node	*last_node(t_ps_node *header)
 	}
 	return (header);
 }
-// static int check_doubles_2(int *arr)
-// {
-// 	int	i;
-// 	int j;
 
-// 	i = 0;
-// 	j = 0;
-	
-//     // Iterate through the array
-// 	// size++;
-// 	while(arr[i]) {
-//         // Compare each element with all subsequent elements
-// 		j = i + 1;
-// 		if (!(arr[j]))
-//         while (arr[j])
-// 		{
-				
-//             // j = i + 1;
-// 			// If a duplicate is found, return true
-//             if (arr[i] == arr[j]) {
-//                 return 1; // True
-//             }
-// 			j++;
-//         }
-// 		i++;	
-//     }
-//     // If no duplicates found, return false
-//     return 0; // False
-// }
-
-static int	check_doubles(t_ps_node *head)
+ int	check_doubles(t_ps_node *head, char **split_arg, int argc)
 {
 	t_ps_node	*temp;
+	t_ps_node	*temp2;
 
 	temp = head;
 	while (temp)
 	{
-		head = temp;
-		while (head)
+		temp2 = head;
+		while (temp2)
 		{
-			if (temp->value == head->value && temp != head)
+			if (temp->value == temp2->value && temp != temp2 && argc == 2)
+				return (free_split(split_arg), 1);
+			else if (temp->value == temp2->value && temp != temp2)
 				return (1);
-			head = head->next;
+			temp2 = temp2->next;
 		}
 		temp = temp->next;
 	}
@@ -154,7 +128,6 @@ static void print_error_message(void)
 static	t_ps_node  *init_stack(char **argv, int argc)
 {
 	t_ps_node	*a_stack;
-	char		**tem;
 	char		*tem1;
 	long		number;
 	int			i;
@@ -162,13 +135,12 @@ static	t_ps_node  *init_stack(char **argv, int argc)
 	a_stack = NULL;
 	number = 0;
 	i = 0;
-	tem = argv;
 	while (argv[i])
 	{
 		number = ft_atoi(argv[i]);
 		tem1 = ft_itoa(number);
 		if (ft_strncmp(tem1, argv[i], 50) && argc == 2)
-			return (free_split(tem), free(tem1), free_stack(&a_stack), NULL);
+			return (free_split(argv), free(tem1), free_stack(&a_stack), NULL);
 		else if (ft_strncmp(tem1, argv[i], 50))
 			return (free(tem1), free_stack(&a_stack), NULL);
 		init_a(&a_stack, number);
@@ -178,31 +150,6 @@ static	t_ps_node  *init_stack(char **argv, int argc)
 	return (a_stack);
 }
 
-// t_ps_node static *index_nodes(t_ps_node **head, t_ps_node **temp)
-// {
-// 	t_ps_node *counter;
-
-// 	//init_a(head, inde)
-// 	if (*head == NULL) {
-//        return;
-//    } else {
-//        current = *head;
-//        while (current->next != NULL) {
-//            index = current->next;
-//            while (index != NULL) {
-//                if (current->data > index->data) {
-//                    // Swap the data of current and index nodes
-//                    temp = current->data;
-//                    current->data = index->data;
-//                    index->data = temp;
-//                }
-//                index = index->next;
-//            }
-//            current = current->next;
-//        }
-//    }
-// 	find_smallest(head);
-// }
 void	ft_pre_index(t_ps_node **stack)
 {
 	t_ps_node	*tmp;
@@ -255,9 +202,10 @@ int	main(int argc, char *argv[])
 {
 	t_ps_node	*a;
 	t_ps_node	*b;
-	char		**split_arg;
+	char		**split_arg ;
 
 	split_arg = NULL;
+	b = NULL;
 	if (argc < 2)
 		return (1);
 	else if (argc == 2)
@@ -267,11 +215,11 @@ int	main(int argc, char *argv[])
 	if (!(parse_input(split_arg)))
 		return (print_error_message(), 1);
 	a = init_stack(split_arg, argc);
-	if (!a || check_doubles(a))
+	if (!a || check_doubles(a, split_arg, argc))
 		return (free_stack(&a), print_error_message(), 1);
 	mini_sort(&a, &b);
 	if (check_if_ordered(&a, split_arg, argc))
-		return (free_stack(&a), 0);
+		return (free_stack(&a), free_stack(&b), 0);
 	first_swap(&a, &b);
 	second_swap(&a, &b);
 	if (argc == 2)

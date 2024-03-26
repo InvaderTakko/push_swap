@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:55 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/25 22:59:10 by sruff            ###   ########.fr       */
+/*   Updated: 2024/03/26 18:29:13 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,62 @@ int	check_if_ordered(t_ps_node **node, char **split_arg, int argc)
 	return (1);
 }
 
+// / shorten mini_sort to 25 lines
+// void mini_sort(t_ps_node **node, t_ps_node **node2)
+// {
+// 	t_ps_node *temp = *node;
+// 	set_price(node);
+// 	int len = lstsize(*node);
+// 	while (len > 3)
+// 	{
+// 		if ((*node)->index < 2)
+// 		{
+// 			if ((*node)->index > (*node)->next->index)
+// 				swap_a(node);
+// 			push_to_b(node, node2);
+// 			len--;
+// 		}
+// 		else
+// 			rotate_a(node);
+// 	}
+// 	if (len <= 3)
+// 	{
+// 		if (find_biggest(*node) == *node)
+// 			rotate_a(node);
+// 		else if ((*node)->next->index == find_biggest(*node)->index)
+// 			reverse_rotate_a(node);
+// 		if ((*node)->next->index < (*node)->index)
+// 			swap_a(node);
+// 	}
+// 	if (len > 3 && len <= 5)
+// 		second_swap(node, node2);
+// }
+
+void	mini_sort_three(t_ps_node **a, t_ps_node **b, int len, int len_og)
+{
+	if (len <= 3)
+	{
+		if (find_biggest(*a) == *a)
+			rotate_a(a);
+		else if ((*a)->next->index == find_biggest(*a)->index)
+			reverse_rotate_a(a);
+		if ((*a)->next->index < (*a)->index)
+			swap_a(a);
+	}
+	if (len_og > 3 && len_og <= 5)
+		second_swap(a, b);
+}
+
 void	mini_sort(t_ps_node **node, t_ps_node **node2)
 {
-	t_ps_node	*temp;
 	int			len;
 	int			len_og;
 
-	temp = *node;
 	set_price(node);
 	len = lstsize(*node);
 	len_og = len;
+	if (check_if_ordered(node, NULL, 0))
+		return (free_stack(node), free_stack(node2));
 	while (len <= 5 && len > 3)
 	{
 		if ((*node)->index == 0 || (*node)->index == 1)
@@ -53,17 +99,7 @@ void	mini_sort(t_ps_node **node, t_ps_node **node2)
 		else
 			rotate_a(node);
 	}
-	if (len <= 3)
-	{
-		if (find_biggest(*node) == *node)
-			rotate_a(node);
-		else if ((*node)->next->index == find_biggest(*node)->index)
-			reverse_rotate_a(node);
-		if ((*node)->next->index < (*node)->index)
-			swap_a(node);
-	}
-	if (len_og > 3 && len_og <= 5)
-		second_swap(node, node2);
+	mini_sort_three(node, node2, len, len_og);
 }
 
 int	find_cheapest(t_ps_node *node)
@@ -76,7 +112,7 @@ int	find_cheapest(t_ps_node *node)
 	j = 1;
 	if (NULL == node)
 		return (0);
-	price = node->price;	
+	price = node->price;
 	while (node)
 	{
 		if (node->price < price)
