@@ -6,14 +6,18 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:19:12 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/25 22:54:14 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/05 17:27:39 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "./libft/libft.h"
+// # include "checker.h"
+// # include "./libft/libft.h"
+// # include "./libft/get_next_line/get_next_line.h"
+# include "libft.h"
+# include "ft_printf.h"
 # include <stdlib.h>
 # include <limits.h>
 # include <stdbool.h>
@@ -67,7 +71,13 @@ void pre_index(t_ps_node **stack);
 void rank_index(t_ps_node **head);
 
 void free_split(char **split_arg);
+int	check_doubles(t_ps_node *head, char **split_arg, int argc);
+int	parse_input(char **input);
+t_ps_node  *init_stack(char **argv, int argc);
+void print_error_message(void);
 
-void mini_sort(t_ps_node **node, t_ps_node **node2);
+void 	mini_sort(t_ps_node **node, t_ps_node **node2);
+void	mini_sort_three(t_ps_node **a, t_ps_node **b, int len, int len_og);
+void	free_stack(t_ps_node **lst);
 
 #endif
