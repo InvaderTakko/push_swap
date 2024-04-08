@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:31:52 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/05 21:05:31 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/08 20:32:44 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	compare(t_ps_node **a, t_ps_node **b, char *output_str)
 		reverse_rotate(b);
 	else if (!ft_strncmp(output_str, "rrr\n", 4))
 		reverse_rotate(a), reverse_rotate(b);
-	if (!ft_strncmp(output_str, "sa\n", 3))
+	else if (!ft_strncmp(output_str, "sa\n", 3))
 		swap(a);
 	else if (!ft_strncmp(output_str, "sb\n", 3))
 		swap(b);
@@ -55,11 +55,11 @@ static void	reading_loop(t_ps_node **a, t_ps_node **b)
 	char	*nl;
 
 	nl = NULL;
-	// nl = get_next_line(0);
-	// if (nl == NULL)
-	// 	return ;
-	// compare(a, b, nl);
-	// free(nl);
+	nl = get_next_line(0);
+	if (nl == NULL)
+		return ;
+	compare(a, b, nl);
+	free(nl);
 	while (1)
 	{
 		nl = get_next_line(0);
@@ -70,28 +70,6 @@ static void	reading_loop(t_ps_node **a, t_ps_node **b)
 	}
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_ps_node	*a;
-// 	t_ps_node	*b;
-// 	char		**split_arg ;
-
-// 	split_arg = NULL;
-// 	b = NULL;
-// 	if (argc < 2)
-// 		return (1);
-// 	else if (argc == 2)
-// 		split_arg = ft_split(argv[1], ' ');
-// 	else if (argc > 2)
-// 		split_arg = &argv[1];
-// 	if (parse_and_init(split_arg, argc, &a))
-// 		return (1);
-// 	reading_loop(&a, &b);
-// 	if (check_if_ordered(&a, split_arg, argc))
-// 		return (ft_printf("OK\n"), free_stack(&a), free_stack(&b), 0);
-// 	else
-// 		return (ft_printf("KO\n"), free_stack(&a), free_stack(&b), 0);
-// }
 
 int	main(int argc, char **argv)
 {
@@ -113,7 +91,8 @@ int	main(int argc, char **argv)
 	if (!a || check_doubles(a, split_arg, argc))
 		return (free_stack(&a), print_error_message(), 1);
 	reading_loop(&a, &b);
-	if (!b && check_if_ordered(&a, split_arg, argc))
+	// printf("%d ", b->value);
+	if (lstsize(b) == 0 && check_if_ordered(&a, split_arg, argc))
 		return (ft_printf("OK\n"), free_stack(&a), free_stack(&b), 0);
 	else
 		return (ft_printf("KO\n"), free_stack(&a), free_stack(&b), 0);

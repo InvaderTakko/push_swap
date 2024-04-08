@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:41:18 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/26 18:56:10 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/08 20:53:41 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,24 @@ void	push(t_ps_node **a_stack, t_ps_node **b_stack)
 {
 	t_ps_node	*temp;
 
-	temp = *b_stack;
-	if (!*a_stack && !*b_stack)
-	{
+	if (!a_stack || !b_stack)
 		return ;
-	}
-	*b_stack = (*b_stack)->next;
+	temp = *b_stack;
 	if (*b_stack)
-		(*b_stack)->previous = NULL;
+	{
+		*b_stack = (*b_stack)->next;
+		if (*b_stack)
+			(*b_stack)->previous = NULL;
+	}
 	temp->next = *a_stack;
 	if (*a_stack)
 		(*a_stack)->previous = temp;
 	temp->previous = NULL;
 	*a_stack = temp;
 }
+
+
+
 
 void	swap(t_ps_node **node)
 {
@@ -57,7 +61,7 @@ void	rotate(t_ps_node **node)
 	t_ps_node	*second;
 	t_ps_node	*last;
 
-	if (*node == NULL || (*node)->next == NULL)
+	if (*node == NULL && (*node)->next == NULL)
 	{
 		return ;
 	}
@@ -78,12 +82,15 @@ void	reverse_rotate(t_ps_node **node)
 	t_ps_node	*last;
 	t_ps_node	*new_last;
 
+	if (*node == NULL || (*node)->next == NULL)
+		return ;
+
 	first = *node;
 	last = last_node(*node);
 	new_last = last->previous;
 	new_last->next = NULL;
 	last->next = first;
 	first->previous = last;
-	*node = (*node)->previous;
+	*node = last;
 	(*node)->previous = NULL;
 }

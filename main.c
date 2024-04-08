@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:14:49 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/05 17:39:55 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/08 20:20:48 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,19 @@ int	main(int argc, char *argv[])
 	if (!(parse_input(split_arg)))
 		return (print_error_message(), 1);
 	a = init_stack(split_arg, argc);
+	// push_to_b(&a, &b);
+	// push_to_b(&a, &b);
+	// reverse_rotate_a(&a);
+	// while(a)
+	// {
+	// 	printf("%d\n", a->value);
+	// 	a = a->next;
+	// }
+	// while(b)
+	// {
+	// 	printf("%d\n", b->value);
+	// 	b = b->next;
+	// }
 	if (!a || check_doubles(a, split_arg, argc))
 		return (free_stack(&a), print_error_message(), 1);
 	mini_sort(&a, &b);
