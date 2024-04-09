@@ -6,11 +6,11 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:54:45 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/08 21:39:47 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/09 10:01:04 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../get_next_line.h"
 
 // char	*ft_strchr(const char *s, int c)
 // {
@@ -30,38 +30,38 @@
 // 	return (NULL);
 // }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
+// size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!src)
-		return (0);
-	if (dstsize != 0)
-	{
-		while (*(src + i) && i < dstsize - 1)
-		{
-			*(dst + i) = *(src + i);
-			i++;
-		}
-		*(dst + i) = '\0';
-	}
-	while (*(src + i))
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	if (!src)
+// 		return (0);
+// 	if (dstsize != 0)
+// 	{
+// 		while (*(src + i) && i < dstsize - 1)
+// 		{
+// 			*(dst + i) = *(src + i);
+// 			i++;
+// 		}
+// 		*(dst + i) = '\0';
+// 	}
+// 	while (*(src + i))
+// 		i++;
+// 	return (i);
+// }
 
-size_t	ft_strlen(const char *s)
-{
-	int	l;
+// size_t	ft_strlen(const char *s)
+// {
+// 	int	l;
 
-	l = 0;
-	if (!s)
-		return (0);
-	while (s[l] != '\0')
-		l++;
-	return (l);
-}
+// 	l = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[l] != '\0')
+// 		l++;
+// 	return (l);
+// }
 
 char	*ft_strjoin1(char const *s1, char const *s2)
 {
@@ -90,7 +90,7 @@ char	*ft_strjoin1(char const *s1, char const *s2)
 	return (ptr[i] = '\0', ptr);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr1(char const *s, unsigned int start, size_t len)
 {
 	char			*sub;
 	char			*subm;

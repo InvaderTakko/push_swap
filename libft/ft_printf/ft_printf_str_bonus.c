@@ -6,18 +6,16 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:41:35 by sruff             #+#    #+#             */
-/*   Updated: 2023/11/28 18:21:44 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/09 13:15:30 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../ft_printf_bonus.h"
 
 void	print_str(t_pf *pf)
 {
-	int		counter;
 	char	*str;
 
-	counter = 0;
 	str = va_arg(pf->args, char *);
 	if (!str)
 		str = "(null)";

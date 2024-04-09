@@ -6,11 +6,11 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:49:40 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/08 21:36:35 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/09 10:01:40 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../get_next_line.h"
 
 static void	multi_free(char **ptr1, char **ptr2, char **ptr3)
 {
@@ -31,29 +31,29 @@ static void	multi_free(char **ptr1, char **ptr2, char **ptr3)
 	}
 }
 
-static void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	const char	*s;
-	char		*d;
+// static void	*ft_memmove(void *dst, const void *src, size_t len)
+// {
+// 	const char	*s;
+// 	char		*d;
 
-	s = (char *)src;
-	d = (char *)dst;
-	if (!d && !s)
-		return (NULL);
-	if (d < s)
-	{
-		while (len--)
-			*d++ = *s++;
-	}
-	else if (d > s)
-	{
-		d = d + len - 1;
-		s = s + len - 1;
-		while (len--)
-			*d-- = *s--;
-	}
-	return (dst);
-}
+// 	s = (char *)src;
+// 	d = (char *)dst;
+// 	if (!d && !s)
+// 		return (NULL);
+// 	if (d < s)
+// 	{
+// 		while (len--)
+// 			*d++ = *s++;
+// 	}
+// 	else if (d > s)
+// 	{
+// 		d = d + len - 1;
+// 		s = s + len - 1;
+// 		while (len--)
+// 			*d-- = *s--;
+// 	}
+// 	return (dst);
+// }
 
 static void	prep_nl(char *buffer, t_gnl *gnl)
 {
@@ -68,7 +68,7 @@ static void	prep_nl(char *buffer, t_gnl *gnl)
 		counter = nl_ptr;
 		while (buffer < counter--)
 			gnl->i++;
-		substr = ft_substr(buffer, 0, gnl->i);
+		substr = ft_substr1(buffer, 0, gnl->i);
 		gnl->temp = ft_strjoin1(gnl->next_line, substr);
 		multi_free(&gnl->next_line, &substr, NULL);
 		gnl->next_line = gnl->temp;

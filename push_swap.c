@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:38:05 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/05 17:40:53 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/09 13:44:39 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void	ft_pre_index(t_ps_node **stack)
 	}
 }
 
-int	parse_input(char **input)
+int	parse_input(char **input, int argc)
 {
 	int	i;
 	int	j;
@@ -181,7 +181,7 @@ int	parse_input(char **input)
 	i = 0;
 	j = 0;
 	if (!(input[i] || !(input)))
-		return (0);
+		return (free_split(input), 0);
 	while (input[i])
 	{
 		while (input[i][j])
@@ -189,7 +189,12 @@ int	parse_input(char **input)
 			if (!(input[i][j] >= '0' && input[i][j] <= '9') && !(j == 0 &&
 				input[i][j] == '-' && (input[i][j + 1] >= '0' &&
 				input[i][j + 1] <= '9')))
+			{
+				if (argc == 2)
+					return (free_split(input), 0);
+						else 
 				return (0);
+			}	
 			j++;
 		}
 		j = 0;

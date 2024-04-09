@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:22:55 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/11 18:38:26 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/09 09:23:17 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ static int	get_wordlen(char const *s, char c)
 
 static char	**free_array(char **ptrarray, int index)
 {
-	int	i;
-
-	i = 0;
 	while (0 <= index)
 	{
 		free(ptrarray[index]);

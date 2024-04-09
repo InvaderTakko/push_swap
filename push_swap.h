@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:19:12 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/05 17:27:39 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/09 13:44:55 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define PUSH_SWAP_H
 
 // # include "checker.h"
-// # include "./libft/libft.h"
+# include "./libft/libft.h"
 // # include "./libft/get_next_line/get_next_line.h"
-# include "libft.h"
-# include "ft_printf.h"
+// # include "libft.h"
+// # include "./libft/ft_printf_bonus.h"
 # include <stdlib.h>
 # include <limits.h>
 # include <stdbool.h>
@@ -72,7 +72,7 @@ void rank_index(t_ps_node **head);
 
 void free_split(char **split_arg);
 int	check_doubles(t_ps_node *head, char **split_arg, int argc);
-int	parse_input(char **input);
+int	parse_input(char **input, int argc);
 t_ps_node  *init_stack(char **argv, int argc);
 void print_error_message(void);
 

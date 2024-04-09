@@ -6,7 +6,7 @@
 #    By: sruff <sruff@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 14:34:25 by sruff             #+#    #+#              #
-#    Updated: 2024/04/08 17:23:19 by sruff            ###   ########.fr        #
+#    Updated: 2024/04/09 15:09:45 by sruff            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJBON = $(SRCBON:%.c=%.o)
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 INC = -I . -I libft 
 LIB = libft/libft.a
 
@@ -48,7 +48,7 @@ re: fclean all
 
 bonus: $(OBJBON)
 	make -C libft
-	$(CC) $(CFLAGS) $(LIB) $^ -o checker $(INC)
+	$(CC) $(CFLAGS) $^ -o checker $(INC) -L libft -lft
 
 ipsv:
 	git clone https://github.com/o-reo/push_swap_visualizer
