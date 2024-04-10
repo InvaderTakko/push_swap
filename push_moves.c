@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:41:18 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/08 20:53:41 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/10 10:37:10 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	push(t_ps_node **a_stack, t_ps_node **b_stack)
 	temp->previous = NULL;
 	*a_stack = temp;
 }
-
-
-
 
 void	swap(t_ps_node **node)
 {
@@ -75,7 +72,6 @@ void	rotate(t_ps_node **node)
 	*node = second;
 }
 
-
 void	reverse_rotate(t_ps_node **node)
 {
 	t_ps_node	*first;
@@ -84,7 +80,6 @@ void	reverse_rotate(t_ps_node **node)
 
 	if (*node == NULL || (*node)->next == NULL)
 		return ;
-
 	first = *node;
 	last = last_node(*node);
 	new_last = last->previous;

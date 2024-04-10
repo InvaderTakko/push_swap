@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:07:03 by sruff             #+#    #+#             */
-/*   Updated: 2024/03/25 22:36:05 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/10 10:43:35 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ int	push_cheapest(t_ps_node **a, t_ps_node **b)
 	while ((*b)->price != biggest_node->price)
 	{
 		if (biggest_node->index < lst_half)
-			rotate_b(b); //top half
+			rotate_b(b);
 		else
-			reverse_rotate_b(b); // bottom half
+			reverse_rotate_b(b);
 	}
 	if ((*b)->price == biggest_node->price)
 		return (push_to_a(a, b), 1);

@@ -6,7 +6,7 @@
 /*   By: sruff <sruff@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 14:31:52 by sruff             #+#    #+#             */
-/*   Updated: 2024/04/09 13:46:30 by sruff            ###   ########.fr       */
+/*   Updated: 2024/04/10 10:35:33 by sruff            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	reading_loop(t_ps_node **a, t_ps_node **b, char **split_arg, int argc)
 		free_split(split_arg);
 	return (1);
 }
-
 
 int	main(int argc, char **argv)
 {
